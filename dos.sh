@@ -101,12 +101,7 @@ else
     touch "./${file_hosts}"
 fi
  
-
-
-
-
 if [[ -e "./${file_hosts}" ]]; then
-
 
     declare -a array
     i=0
@@ -118,8 +113,6 @@ if [[ -e "./${file_hosts}" ]]; then
     if [[ $query != "" ]]; then
         array[i++]="$query"
 
-        echo "add_new: ${add_new}"
-
         if [[ $add_new == "true" ]]; then
             echo "${query}" | tee -a "./${file_hosts}"
         fi
@@ -128,22 +121,19 @@ if [[ -e "./${file_hosts}" ]]; then
     for item in "${array[@]}"; do
         # переопределяем таргет
         if [ -e "./${file_targets}" ]; then
-            echo "del data from file_targets"
             echo -n > "./${file_targets}"
         else
             touch "./${file_targets}"
         fi
 
-        for ((i=0; i<=1200; i+=100)); do
-            echo "${method} ${item}" |  tee -a "./${file_targets}"
+        for ((i=0; i<=12; i++)); do
+            echo "${method} ${item}" |  tee -a "./${file_targets}" >> /dev/null &
         done
 
         for ((i=1; i<"${iteration}"; i++)); do
-            echo "cat: "
-            cat "./${file_targets}" #| ./vegeta attack  >> /dev/null &
-            # disown
+            echo "runing vegeta attack ${i}"
+            cat "./${file_targets}" | ./vegeta attack  >> /dev/null &
+            disown
         done
     done
-
-
 fi
