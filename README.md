@@ -6,6 +6,11 @@ this script written by my when i drinking beer<br>
 and this need me and my friend it OK?<br>
 
 ## how to run
+- download:
+```
+curl -O https://github.com/Norv139/vegeta-auto-attack-script/blob/main/dos.sh
+```
+
 - run: 
 ```
 bash ./dos.sh
