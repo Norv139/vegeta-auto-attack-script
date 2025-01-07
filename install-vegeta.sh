@@ -60,6 +60,7 @@ else
             curl -Lo vegeta.zip  $DOWNLOAD_LINK
         fi
         unzip vegeta.zip
+        del vegeta.zip
     else 
         if [ -e "vegeta.tar.gz" ]; then
             echo "vegeta.tar.gz  exist"
@@ -67,5 +68,6 @@ else
             curl -Lo vegeta.tar.gz $DOWNLOAD_LINK
         fi
         tar xf vegeta.tar.gz 
+        rm -rf ./vegeta.tar.gz
     fi
 fi
